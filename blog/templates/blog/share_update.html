@@ -1,0 +1,17 @@
+{% extends 'generic.html' %}
+
+{% block head %} Share Gist {% endblock %}
+{% block content %}
+  {% if sent %}
+  	<h1>Email Sent Successfully</h1>
+  	<p> "{{news.title}}" sent successfully  </p>
+  {% else %}
+  	<h2>share gist by e-mail</h2>
+  	<form action="" method="post">
+  		{% csrf_token %}
+  		{{post_form.as_p}}
+  		<input type="submit" name="" value="Share post">
+  	</form>
+
+  {% endif %}
+{% endblock %}

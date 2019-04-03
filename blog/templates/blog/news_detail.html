@@ -1,0 +1,58 @@
+{% extends 'generic.html' %}
+{% load my_tag %}
+
+<body>
+{% block content %}
+
+  <div class="container main content">
+    <div class="row">
+     
+      <div class="col-md-7">
+        <h3><strong>Title:</strong> {{news.title}}</h3> 
+        <p><a class="text-success" href="{% url 'share-post' news.id %}">share Gist</a> </p> <br>
+        <p class="date" ><strong>Published on </strong> <i>{{ news.created}}</i>
+          By <b>{{news.name}}</b></p>
+        <p>{{news.post | linebreaks }} </p>
+
+        <h2 align="Center" class="text-info"> COMMENT!!!</h2>
+        {% if new_comment %}
+          <p>cool Your comment has been added !!!</p>
+        {% else %}
+          <form action="" method="post">
+            {% csrf_token %}
+            {{ comment_info.as_p }}
+          
+            <input type="submit" value="Add comment" class="text-success">
+          </form>
+
+        {% endif %}
+         <br>
+      
+
+        {% with comments.count as total_comments %}
+          <p>{{  total_comments }} comment{{ total_comments | pluralize }}</p>
+        {% endwith %}
+        <br>
+  
+        {% for comment in comments %}
+          {{ forloop.counter }} comment by {{ comment.name }} on {{comment.created}} <br>
+          {{comment.body | linebreaks }} <hr>
+
+        {% empty %}
+          <p>OOPS!!! no comment yet!!!!!!</p>
+
+        {% endfor %}
+      </div>
+
+      <div class="col-md-3"> 
+        {% latest_news 3 %}
+        <br>  
+      </div>
+      
+    </div>
+      
+
+  </div>
+
+{% endblock %}
+</body>

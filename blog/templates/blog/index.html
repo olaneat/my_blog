@@ -1,0 +1,41 @@
+{% extends "generic.html" %}
+{% load my_tag %}
+
+{% block content %}
+<div class="container">
+    <div i.d="headline">
+      <h2>HEADLINES</h2>
+
+    </div >
+  <div class="row">
+    <div class="col-md-2">
+      <p>I've got {% total_tag %} Gists for you </p>
+    </div>
+    <div class="col-md-6">
+      {% if news %}
+        <ul>
+          {% for gist in news %}
+
+           <li> <h3> <a href="{{ gist.get_absolute_url }}"> {{gist.title}}</a>
+             {{ gist.date }}</h3></li>
+
+          {% endfor %}
+        </ul>
+     {% else %}
+       <p>There's no news available</p>
+     {% endif %}
+     
+     {% include "pagination.html" with page=news %}
+
+    </div>
+     
+    <br>
+ 
+
+  </div>
+
+    </div>
+  </div>
+  
+</div>
+{% endblock %}

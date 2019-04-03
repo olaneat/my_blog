@@ -1,0 +1,10 @@
+{% if lastest_gossip %}
+  <ul>
+  	{% for gist in last_gossip %}
+      <li><a href="{{ gist.get_absolute_url }}"> {{gist.title}} </a></li>
+      <br>
+    {% endfor %}
+  </ul>
+  
+  
+{% endif %}
